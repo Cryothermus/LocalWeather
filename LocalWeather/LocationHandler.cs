@@ -18,14 +18,12 @@ namespace LocalWeather
         {
             Watcher = new GeoCoordinateWatcher();
             CurrentLocation = GetCurrentLocation();
-           
-
         }
 
        
         public GeoCoordinate GetCurrentLocation()
         {
-            Watcher.TryStart(true, TimeSpan.FromSeconds(.05));
+            Watcher.TryStart(true, TimeSpan.FromSeconds(1));
             if (Watcher.Status == GeoPositionStatus.Ready)
             {
                 return Watcher.Position.Location;

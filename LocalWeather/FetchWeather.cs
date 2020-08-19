@@ -43,13 +43,14 @@ namespace LocalWeather
 
         }
 
+        private readonly WeatherValues BlankValues = new WeatherValues(0, 0, 0, 0, "Unknown", 0, 0, "Unknown");
         public WeatherValues ReadValues;
         
         public FetchWeather ()
         {
             CurrentURL = ForecastURL;
             WeatherData = new XmlDocument();
-            ReadValues = new WeatherValues();
+            ReadValues = BlankValues;
         }
 
         public void SetCurrentURL (string City) //sets URL to gather data based on city
@@ -60,6 +61,7 @@ namespace LocalWeather
         public void SetCurrentURL(double latitude, double longitude) //set URL to gather data based on geographic coords
         {
             CurrentURL = ForecastURL.Replace("@QUERY@", $"lat={latitude}&lon={longitude}");
+            Console.WriteLine(CurrentURL);
         }
 
         public void SetCurrentURL(int zipcode) // gathers data based on zip code
@@ -78,49 +80,60 @@ namespace LocalWeather
         catch (WebException ex)
             {
                 Console.WriteLine(ex);
+                ReadValues = BlankValues;
             }
         catch (Exception)
             {
                 Console.WriteLine("Unknown error when getting weather data.");
+                ReadValues = BlankValues;
             }
         }
 
         private void SetWeatherValues()
         {
-            XmlNode temp_node = WeatherData.SelectSingleNode("current/temperature");
-            double TempCurrent = double.Parse(temp_node.Attributes["value"].Value);
-            double TempHigh = double.Parse(temp_node.Attributes["max"].Value);
-            double TempLow = double.Parse(temp_node.Attributes["min"].Value);
-
-            XmlNode windspeed_node = WeatherData.SelectSingleNode("current/wind/speed");
-            double WindSpeed = double.Parse(windspeed_node.Attributes["value"].Value);
-
-            XmlNode winddir_node = WeatherData.SelectSingleNode("current/wind/direction");
-            string WindDirection = winddir_node.Attributes["code"].Value;
-
-            XmlNode clouds_node = WeatherData.SelectSingleNode("current/clouds");
-            int CloudCover = int.Parse(clouds_node.Attributes["value"].Value);
-
-            XmlNode rain_node = WeatherData.SelectSingleNode("current/precipitation");
-            double Rainfall = 0;
-            if (!rain_node.Attributes["mode"].Value.Equals("no")) 
+            try
             {
-                Rainfall = double.Parse(rain_node.Attributes["value"].Value);
-                Console.WriteLine(Rainfall);
+                XmlNode temp_node = WeatherData.SelectSingleNode("current/temperature");
+                double TempCurrent = double.Parse(temp_node.Attributes["value"].Value);
+                double TempHigh = double.Parse(temp_node.Attributes["max"].Value);
+                double TempLow = double.Parse(temp_node.Attributes["min"].Value);
+
+                XmlNode windspeed_node = WeatherData.SelectSingleNode("current/wind/speed");
+                double WindSpeed = double.Parse(windspeed_node.Attributes["value"].Value);
+
+                XmlNode winddir_node = WeatherData.SelectSingleNode("current/wind/direction");
+                string WindDirection = winddir_node.Attributes["code"].Value;
+
+                XmlNode clouds_node = WeatherData.SelectSingleNode("current/clouds");
+                int CloudCover = int.Parse(clouds_node.Attributes["value"].Value);
+
+                XmlNode rain_node = WeatherData.SelectSingleNode("current/precipitation");
+                double Rainfall = 0;
+                if (!rain_node.Attributes["mode"].Value.Equals("no"))
+                {
+                    Rainfall = double.Parse(rain_node.Attributes["value"].Value);
+                    //Console.WriteLine(Rainfall);
+                }
+
+                XmlNode weather_node = WeatherData.SelectSingleNode("current/weather");
+                string WeatherDescription = weather_node.Attributes["value"].Value;
+                Console.WriteLine(WeatherDescription);
+
+                ReadValues = new WeatherValues(TempCurrent,
+                    TempHigh,
+                    TempLow,
+                    WindSpeed,
+                    WindDirection,
+                    CloudCover,
+                    Rainfall,
+                    WeatherDescription);
             }
-
-            XmlNode weather_node = WeatherData.SelectSingleNode("current/weather");
-            string WeatherDescription = weather_node.Attributes["value"].Value;
-            Console.WriteLine(WeatherDescription);
-
-            ReadValues = new WeatherValues(TempCurrent,
-                TempHigh,
-                TempLow,
-                WindSpeed,
-                WindDirection,
-                CloudCover,
-                Rainfall,
-                WeatherDescription);
+            catch (Exception)
+            {
+                Console.WriteLine("Unable to read XML data.");
+                ReadValues = BlankValues;
+            }
+            
         }
     }
 

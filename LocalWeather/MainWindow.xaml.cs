@@ -25,23 +25,29 @@ namespace LocalWeather
         
         LocationHandler Tracker;
         public string LocationString { get; set; }
+        FetchWeather Fetcher;
         public MainWindow()
         {
            
             Tracker = new LocationHandler();
             Tracker.Watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(Refresh);
             InitializeComponent();
-            //CoordsBlock.Text = LocationString;
-            FetchWeather Fetcher = new FetchWeather();
-            Fetcher.SetCurrentURL("Tempe");
-            Fetcher.GetWeatherData();
+            Fetcher = new FetchWeather();
+            //Fetcher.SetCurrentURL("Tempe");
+            //Fetcher.GetWeatherData();
         }
 
-        
+
         private void Refresh(object sender, GeoPositionStatusChangedEventArgs e)
         {
-            Tracker.RefreshLocation();
-            //CoordsBlock.Text = Tracker.GetCoordsString(Tracker.CurrentLocation);
+            if (Tracker.Watcher.Status == GeoPositionStatus.Ready)
+            {
+                Tracker.RefreshLocation();
+                Fetcher.SetCurrentURL(Tracker.CurrentLocation.Latitude, Tracker.CurrentLocation.Longitude);
+                Fetcher.GetWeatherData();
+            }
+            
         }
+      
     }
 }
