@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -6,14 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-// OpenWeatherMap API key: 3c4bb73550d625dacbf72c8a8f80a570
-
 namespace LocalWeather
 {
     
     class FetchWeather
     {
-        private const string APIKey = "3c4bb73550d625dacbf72c8a8f80a570";
+        private const string APIKey = PrivateKeys.APIKey;
         private const string ForecastURL = "http://api.openweathermap.org/data/2.5/weather?@QUERY@&units=imperial&mode=xml&APPID=" + APIKey;
         private string CurrentURL;
         public XmlDocument WeatherData;
@@ -69,7 +69,6 @@ namespace LocalWeather
             CurrentURL = ForecastURL.Replace("@QUERY@", $"zip={zipcode}");
         }
 
-        // reference weather doc: http://api.openweathermap.org/data/2.5/weather?lat=33.41&lon=-111.91&units=imperial&mode=xml&APPID=3c4bb73550d625dacbf72c8a8f80a570
         public void GetWeatherData()
         {
         try

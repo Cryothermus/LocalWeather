@@ -82,6 +82,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PrivateKeysPublic.cs" />
+    <Compile Include="PrivateKeys.cs" />
     <Compile Include="FetchWeather.cs" />
     <Compile Include="LocationHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
