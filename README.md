@@ -16,5 +16,5 @@ existing work to Github, so others can at least see what I've been working on.
 ### Upcoming features:
 
 - A UI that will allow users to actually take advantage of the functionality listed above.
-- Better handling for errors and delays associated with GeoCoordinateWater and API usage.
+- Better handling for potential errors and delays associated with GeoCoordinateWater and API usage.
 - Weather forecasts? More detailed information? Better visuals?
