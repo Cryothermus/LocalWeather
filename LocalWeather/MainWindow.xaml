@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LocalWeather"
         mc:Ignorable="d"
-        Title="MainWindow" Height="290" Width="563.2">
-    <Grid Margin="0,0,3.8,3"/>
+        Title="MainWindow" Height="500" Width="450">
+  <Grid Margin="1,0,3.2,4.4" Background="WhiteSmoke">
+    <local:LabelledData HorizontalAlignment="Left" Height="25" Margin="50,65,0,0" VerticalAlignment="Top" Width="100" LabelText="Sample:" BoxWidth="50"/>
+  </Grid>
+
 </Window>
