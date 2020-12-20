@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="25" d:DesignWidth="160"
              Height="25">
-    <Grid Background="WhiteSmoke" Height="25">
+    <Grid Background="Transparent" Height="25">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

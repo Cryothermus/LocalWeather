@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="LocalWeather.LabelledDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LocalWeather"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="400">
+    <Grid Background="WhiteSmoke" Margin="0,0,10.2,10.2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <local:LabelledData x:Name="CurrentTemp" Grid.Row="0" Grid.Column="0" LabelText="Current Temp:" BoxWidth="50"/>
+        <local:LabelledData x:Name="CloudCover" Grid.Row="1" Grid.Column="0" LabelText="Cloud Cover:" BoxWidth="50"/>
+        <local:LabelledData x:Name="WindSpeed" Grid.Row="2" Grid.Column="0" LabelText="Wind Speed:" BoxWidth="50"/>
+        <local:LabelledData x:Name="Precip" Grid.Row="3" Grid.Column="0" LabelText="Precipitation:" BoxWidth="50"/>
+        <local:LabelledData x:Name="HighTemp" Grid.Row="0" Grid.Column="2" LabelText="High:" BoxWidth="50"/>
+        <local:LabelledData x:Name="LowTemp" Grid.Row="1" Grid.Column="2" LabelText="Low:" BoxWidth="50"/>
+        <local:LabelledData x:Name="WindDirection" Grid.Row="2" Grid.Column="2" LabelText="Wind Direction:" BoxWidth="50"/>
+        <local:LabelledData x:Name="WeatherDesc" Grid.Row="3" Grid.Column="2" LabelText="Summary:" BoxWidth="50"/>
+
+    </Grid>
+</UserControl>

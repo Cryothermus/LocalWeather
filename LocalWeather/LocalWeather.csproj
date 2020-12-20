@@ -78,6 +78,9 @@
     <Compile Include="LabelledData.xaml.cs">
       <DependentUpon>LabelledData.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LabelledDataGrid.xaml.cs">
+      <DependentUpon>LabelledDataGrid.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -95,6 +98,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="LabelledData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LabelledDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

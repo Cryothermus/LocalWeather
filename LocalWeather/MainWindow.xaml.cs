@@ -25,7 +25,7 @@ namespace LocalWeather
         
         LocationHandler Tracker;
         public string LocationString { get; set; }
-        FetchWeather Fetcher;
+        public FetchWeather Fetcher;
         public MainWindow()
         {
            

@@ -11,7 +11,7 @@ using System.Xml;
 namespace LocalWeather
 {
     
-    class FetchWeather
+    public class FetchWeather
     {
         private const string APIKey = PrivateKeys.APIKey;
         private const string ForecastURL = "http://api.openweathermap.org/data/2.5/weather?@QUERY@&units=imperial&mode=xml&APPID=" + APIKey;
@@ -53,6 +53,11 @@ namespace LocalWeather
             ReadValues = BlankValues;
         }
 
+        public WeatherValues GetValues()
+        {
+            return ReadValues;
+        }
+
         public void SetCurrentURL (string City) //sets URL to gather data based on city
         {
             CurrentURL = ForecastURL.Replace("@QUERY@", $"q={City}");
@@ -92,20 +97,25 @@ namespace LocalWeather
         {
             try
             {
+                //reads temperature values (current, high, low)
                 XmlNode temp_node = WeatherData.SelectSingleNode("current/temperature");
                 double TempCurrent = double.Parse(temp_node.Attributes["value"].Value);
                 double TempHigh = double.Parse(temp_node.Attributes["max"].Value);
                 double TempLow = double.Parse(temp_node.Attributes["min"].Value);
 
+                //reads wind speed
                 XmlNode windspeed_node = WeatherData.SelectSingleNode("current/wind/speed");
                 double WindSpeed = double.Parse(windspeed_node.Attributes["value"].Value);
 
+                //reads wind direction
                 XmlNode winddir_node = WeatherData.SelectSingleNode("current/wind/direction");
                 string WindDirection = winddir_node.Attributes["code"].Value;
 
+                //reads cloud cover value
                 XmlNode clouds_node = WeatherData.SelectSingleNode("current/clouds");
                 int CloudCover = int.Parse(clouds_node.Attributes["value"].Value);
 
+                //reads current precipitation
                 XmlNode rain_node = WeatherData.SelectSingleNode("current/precipitation");
                 double Rainfall = 0;
                 if (!rain_node.Attributes["mode"].Value.Equals("no"))
@@ -114,6 +124,7 @@ namespace LocalWeather
                     //Console.WriteLine(Rainfall);
                 }
 
+                // reads the weather description
                 XmlNode weather_node = WeatherData.SelectSingleNode("current/weather");
                 string WeatherDescription = weather_node.Attributes["value"].Value;
                 Console.WriteLine(WeatherDescription);
