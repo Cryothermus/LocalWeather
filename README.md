@@ -3,8 +3,7 @@
 This is a project I started working on around mid-July in the summer of 2020- a desktop application, written in C#, that can fetch the current weather data for either your location or
 a city/postal code of your choice. I wrote it to practice a few major skills, including general C# programming, web API use, and UI design using WPF.
 
-It's still a major WIP, and since classes have started back up, work on it is likely to slow down significantly. Nonetheless, I made a few security-oriented changes and published my 
-existing work to Github, so others can at least see what I've been working on.
+Since I ended up later doing pretty much everything attempted here as part of my regular academic work, this project has more or less been abandoned. However, I've decided to at least make a few security-oriented changes and push my work to Github, so others can at least see what I've been working on at this point in time.
 
 ### Current features:
 
@@ -16,5 +15,5 @@ existing work to Github, so others can at least see what I've been working on.
 ### Upcoming features:
 
 - A UI that will allow users to actually take advantage of the functionality listed above.
-- Better handling for potential errors and delays associated with GeoCoordinateWater and API usage.
+- Better handling for potential errors and delays associated with GeoCoordinateWatcher and API usage.
 - Weather forecasts? More detailed information? Better visuals?
